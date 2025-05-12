@@ -3,11 +3,16 @@ import {
   View, Text, TextInput, TouchableOpacity, Image
 } from 'react-native';
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
+import { goToAuthChoice } from './helpers';
 
-console.log('Styles loaded:', styles.container);
+
+console.log('goToAuthChoice loaded:', typeof goToAuthChoice);
 
 
 const LoginScreen = () => {
+
+  const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -50,9 +55,13 @@ const LoginScreen = () => {
         <Text style={styles.forgotPassword}>FORGOTTEN PASSWORD?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.outlinedButton}>
-        <Text style={styles.outlinedButtonText}>Create a new Account</Text>
-      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.outlinedButton}
+        onPress={() => goToAuthChoice(navigation)}
+       >
+       <Text style={styles.outlinedButtonText}>Create a new Account</Text>
+       </TouchableOpacity>
+
     </View>
   );
 };
