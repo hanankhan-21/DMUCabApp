@@ -1,6 +1,4 @@
-// src/config/firebase.js
-
-import { initializeApp, getApps, getApp } from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
@@ -14,11 +12,13 @@ const firebaseConfig = {
   appId: "1:404879806612:web:cdd7a41737c00a9e002481"
 };
 
-// Only initialize app if not already initialized
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+// ✅ Initialize app
+const app = initializeApp(firebaseConfig);
 
-// ✅ DO NOT assign auth here — just export a lazy getter
+// ✅ Initialize services
+const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-export { app, db, storage };
+// ✅ Export everything you need
+export { app, auth, db, storage };

@@ -6,6 +6,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import styles from './styles';
 import { getAuth } from 'firebase/auth';
 import { app } from '../../config/firebase';
+import handleRegister from './helpers'; 
 
 const auth = getAuth(app);
 
@@ -27,15 +28,22 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const onSubmit = async () => {
-    if (password !== confirmPassword) {
-      Alert.alert('Error', 'Passwords do not match');
-      return;
-    }
+ const onSubmit = async () => {
+  if (password !== confirmPassword) {
+    Alert.alert('Error', 'Passwords do not match');
+    return;
+  }
+
+  try {
+    console.log('Submitting registration...');
     await handleRegister({
       name, email, phone, password, role, navigation
     });
-  };
+  } catch (err) {
+    console.error('Submit failed:', err);
+  }
+};
+
 return (
   <ScrollView contentContainerStyle={styles.container}>
     <Text style={styles.title}>Welcome!</Text>
