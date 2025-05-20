@@ -4,8 +4,16 @@ import {
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import styles from './styles';
-import { handleRegister } from './helpers';
+import { getAuth } from 'firebase/auth';
+import { app } from '../../config/firebase';
+
+const auth = getAuth(app);
+
+
 console.log('Register styles loaded:', typeof styles?.container);
+console.log('Firebase Auth Connected:', auth ? '✅ Ready' : '❌ Not loaded');
+
+console.log('Firebase Auth Connected:', auth);
 
 
 const RegisterScreen = () => {
