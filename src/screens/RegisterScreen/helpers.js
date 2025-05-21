@@ -29,7 +29,8 @@ import { doc, setDoc } from 'firebase/firestore';
     // Step 3: Redirect based on role
     if (role === 'driver') {
       Alert.alert('Success', 'Registered as Driver. Proceed to upload documents.');
-      navigation.replace('DocumentUpload');
+       navigation.replace('DocumentsUpload'); 
+;
     } else {
       Alert.alert('Success', 'Registered successfully.');
       navigation.replace('LoginScreen');
